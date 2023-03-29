@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Search Engine</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+      h1 {
+        text-align: center;
+      }
+      #search-box {
+        width: 60%;
+        margin: 0 auto;
+        padding: 20px;
+        font-size: 18px;
+        border: 2px solid #ccc;
+        border-radius: 10px;
+      }
+      #search-results {
+        width: 60%;
+        margin: 0 auto;
+        padding: 20px;
+        font-size: 16px;
+        border: 2px solid #ccc;
+        border-radius: 10px;
+        white-space: pre-line;
+      }
+      #search-results::before {
+        content: "Results:\A";
+        white-space: pre;
+      }
+      #search-results.empty {
+        display: none;
+      }
+      input[type="submit"] {
+        font-size: 18px;
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+      input[type="submit"]:hover {
+        background-color: #3e8e41;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Search Engine</h1>
+    <div id="search-box-container">
+      <form id="search-form">
+        <input type="text" id="search-box" name="query" placeholder="Search...">
+        <input type="submit" value="Search">
+      </form>
+    </div>
+    <div id="search-results" class="empty"></div>
+    <script>
+      // Get references to the form and search box elements
+      const searchForm = document.getElementById('search-form');
+      const searchBox = document.getElementById('search-box');
+
+      // Add an event listener to the form to handle submissions
+      searchForm.addEventListener('submit', function(e) {
+        // Prevent the form from actually submitting
+        e.preventDefault();
+
+        // Get the value of the search box
+        const query = searchBox.value;
+
+        // Create a new XMLHttpRequest object
+        const xhr = new XMLHttpRequest();
+
+        // Set up the request
+        xhr.open('POST', '/gen');
+
+        // Set the Content-Type header to indicate that we're sending raw text data
+        xhr.setRequestHeader('Content-Type', 'text/plain');
+
+        // Set up a callback function to handle the response
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+              // If the request was successful, update the search box with the response
+              searchBox.value = xhr.responseText;
+              document.getElementById('search-results').textContent = xhr.responseText.trim();
+              document.getElementById('search-results').classList.remove('empty');
+            } else {
+              // If the request was unsuccessful, log an error message
+              console.error('Error:', xhr.status, xhr.statusText);
+            }
+          }
+        };
+
+        // Send the request with the search query as the payload
+        xhr.send(query);
+      });
+    </script>
+  </body>
+</html>
