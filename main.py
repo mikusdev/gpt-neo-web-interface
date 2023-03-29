@@ -22,7 +22,7 @@ def gen():
     input_text = request.data.decode('utf-8') # Decode the input data from bytes to a string
     happy_gen = HappyGeneration("GPT-NEO", "EleutherAI/gpt-neo-125M")
     result = happy_gen.generate_text(input_text)
-    result = strip_text(result)
+    result = strip_text(result[1])
     return result
 
 
