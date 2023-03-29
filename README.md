@@ -4,7 +4,8 @@ A simple GPT-Neo web interface. This can run on a vultr 1 VCPU, and 512MB ram.
 ## How can I run this?
 Use a VPS service, or run it yourself!
 
-`git clone https://github.com/mikusdev/gpt-neo-web-interface.git`
+`git clone https://github.com/mikusdev/gpt-neo-web-interface.git`, then
+
 `cd gpt-neo-web-interface`
 
 Now the Python part.
