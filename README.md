@@ -9,7 +9,7 @@ Use a VPS service, or run it yourself!
 `cd gpt-neo-web-interface`
 
 Now the Python part.
-To install the modules required, run `pip install -r requirements.txt` or `pip install -r requirements.txt`, depending on your version of python.
+To install the modules required, run `pip install -r requirements.txt` or `pip3 install -r requirements.txt`, depending on your version of python.
 
 Then simply run `python3 main.py` or `python main.py`
 
